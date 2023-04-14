@@ -12,15 +12,12 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.test.context.ContextConfigurationAttributes;
 import org.springframework.test.context.ContextCustomizer;
 import org.springframework.test.context.ContextCustomizerFactory;
-import org.testcontainers.containers.KafkaContainer;
 import tech.jhipster.config.JHipsterConstants;
 
 public class TestContainersSpringContextCustomizerFactory implements ContextCustomizerFactory {
 
     private Logger log = LoggerFactory.getLogger(TestContainersSpringContextCustomizerFactory.class);
 
-    private static KafkaTestContainer kafkaBean;
-    private static ElasticsearchTestContainer elasticsearchBean;
     private static SqlTestContainer devTestContainer;
     private static SqlTestContainer prodTestContainer;
 
@@ -75,40 +72,6 @@ public class TestContainersSpringContextCustomizerFactory implements ContextCust
                     testValues = testValues.and("spring.datasource.username=" + prodTestContainer.getTestContainer().getUsername());
                     testValues = testValues.and("spring.datasource.password=" + prodTestContainer.getTestContainer().getPassword());
                 }
-            }
-            EmbeddedKafka kafkaAnnotation = AnnotatedElementUtils.findMergedAnnotation(testClass, EmbeddedKafka.class);
-            if (null != kafkaAnnotation) {
-                log.debug("detected the EmbeddedKafka annotation on class {}", testClass.getName());
-                log.info("Warming up the kafka broker");
-                if (null == kafkaBean) {
-                    kafkaBean = beanFactory.createBean(KafkaTestContainer.class);
-                    beanFactory.registerSingleton(KafkaTestContainer.class.getName(), kafkaBean);
-                    // ((DefaultListableBeanFactory)beanFactory).registerDisposableBean(KafkaTestContainer.class.getName(), kafkaBean);
-                }
-                testValues =
-                    testValues.and(
-                        "spring.cloud.stream.kafka.binder.brokers=" +
-                        kafkaBean.getKafkaContainer().getHost() +
-                        ':' +
-                        kafkaBean.getKafkaContainer().getMappedPort(KafkaContainer.KAFKA_PORT)
-                    );
-            }
-            EmbeddedElasticsearch elasticsearchAnnotation = AnnotatedElementUtils.findMergedAnnotation(
-                testClass,
-                EmbeddedElasticsearch.class
-            );
-            if (null != elasticsearchAnnotation) {
-                log.debug("detected the EmbeddedElasticsearch annotation on class {}", testClass.getName());
-                log.info("Warming up the elastic database");
-                if (null == elasticsearchBean) {
-                    elasticsearchBean = beanFactory.createBean(ElasticsearchTestContainer.class);
-                    beanFactory.registerSingleton(ElasticsearchTestContainer.class.getName(), elasticsearchBean);
-                    // ((DefaultListableBeanFactory)beanFactory).registerDisposableBean(ElasticsearchTestContainer.class.getName(), elasticsearchBean);
-                }
-                testValues =
-                    testValues.and(
-                        "spring.elasticsearch.uris=http://" + elasticsearchBean.getElasticsearchContainer().getHttpHostAddress()
-                    );
             }
             testValues.applyTo(context);
         };

@@ -1,15 +1,11 @@
 package com.app.orderservice.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import com.app.orderservice.IntegrationTest;
 import com.app.orderservice.config.Constants;
 import com.app.orderservice.domain.User;
 import com.app.orderservice.repository.UserRepository;
-import com.app.orderservice.repository.search.UserSearchRepository;
 import com.app.orderservice.security.AuthoritiesConstants;
 import com.app.orderservice.service.dto.AdminUserDTO;
 import java.util.Collection;
@@ -19,7 +15,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,14 +49,6 @@ class UserServiceIT {
 
     @Autowired
     private UserService userService;
-
-    /**
-     * This repository is mocked in the com.app.orderservice.repository.search test package.
-     *
-     * @see com.app.orderservice.repository.search.UserSearchRepositoryMockConfiguration
-     */
-    @SpyBean
-    private UserSearchRepository spiedUserSearchRepository;
 
     private User user;
 

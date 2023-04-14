@@ -1,0 +1,123 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413130854",
+  "clientRootFolder": "orderservice",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "jhi_order",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdUser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedUser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shopId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "brandId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "productQuantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "productImage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productColor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productSize",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "couponCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "tax",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalMoney",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliveryDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "shippingAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentStatus",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "orderservice",
+  "name": "Order",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

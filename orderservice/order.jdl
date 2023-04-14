@@ -1,29 +1,56 @@
-entity Product(product) {
+entity Order(order) {
     id UUID,
     createdDate Instant,
     createdUser String,
     updatedDate Instant,
     updatedUser String,
-    name String,
-    description String,
-    price BigDecimal,
-    quantity Integer,
-    category String,
-    imageUrl String,
-    manufacturerId String,
-    productAttributeId String,
-    brandId String
+    userId String,
+    shopId String,
+    brandId String,
+    productId String,
+    productName String,
+    productPrice BigDecimal,
+    productQuantity Integer,
+    productImage String,
+    productColor String,
+    productSize String,
+    productWeight BigDecimal,
+    discount BigDecimal,
+    couponCode String
+    shippingCost BigDecimal,
+    tax BigDecimal,
+    totalMoney BigDecimal,
+    status String,
+    deliveryDate Instant,
+    shippingAddress String,
+    paymentMethod String,
+    paymentStatus String
 }
 
-entity Category(category) {
+entity Cart(cart) {
     id UUID,
     createdDate Instant,
     createdUser String,
     updatedDate Instant,
     updatedUser String,
-    name String,
-    description String,
-    imageUrl String,
+    userId String,
+    shopId String,
+    brandId String,
+    productId String,
+    productName String,
+    productPrice BigDecimal,
+    productQuantity Integer,
+    productImage String,
+    subtotal BigDecimal,
+    shippingCost BigDecimal,
+    tax BigDecimal,
+    totalMoney BigDecimal,
+    createdAt Instant,
+    productColor String,
+    productSize String,
+    productWeight BigDecimal,
+    discount BigDecimal,
+    couponCode String
 }
 
 

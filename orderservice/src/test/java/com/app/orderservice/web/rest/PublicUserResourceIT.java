@@ -9,7 +9,6 @@ import com.app.orderservice.IntegrationTest;
 import com.app.orderservice.config.TestSecurityConfiguration;
 import com.app.orderservice.domain.User;
 import com.app.orderservice.repository.UserRepository;
-import com.app.orderservice.repository.search.UserSearchRepository;
 import com.app.orderservice.security.AuthoritiesConstants;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,14 +32,6 @@ class PublicUserResourceIT {
 
     @Autowired
     private UserRepository userRepository;
-
-    /**
-     * This repository is mocked in the com.app.orderservice.repository.search test package.
-     *
-     * @see com.app.orderservice.repository.search.UserSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private UserSearchRepository mockUserSearchRepository;
 
     @Autowired
     private EntityManager em;

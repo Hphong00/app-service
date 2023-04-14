@@ -5,7 +5,6 @@ import com.app.orderservice.domain.Authority;
 import com.app.orderservice.domain.User;
 import com.app.orderservice.repository.AuthorityRepository;
 import com.app.orderservice.repository.UserRepository;
-import com.app.orderservice.repository.search.UserSearchRepository;
 import com.app.orderservice.security.SecurityUtils;
 import com.app.orderservice.service.dto.AdminUserDTO;
 import com.app.orderservice.service.dto.UserDTO;
@@ -34,13 +33,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final UserSearchRepository userSearchRepository;
-
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
-        this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
     }
 
@@ -65,7 +61,6 @@ public class UserService {
                 }
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
-                userSearchRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
             });
     }

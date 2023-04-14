@@ -122,26 +122,8 @@ management:
             enabled: true
 
 spring:
-  autoconfigure:
-    exclude: org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
   application:
     name: orderservice
-  cloud:
-    stream:
-      kafka:
-        binder:
-          replicationFactor: 1
-          auto-create-topics: true
-          brokers: localhost:9092
-      bindings:
-        binding-in-sse:
-          destination: sse-topic
-          content-type: text/plain
-          group: orderservice
-        binding-out-sse:
-          destination: sse-topic
-          content-type: text/plain
-          group: orderservice
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -207,11 +189,11 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://localhost:9080/realms/jhipster
+            issuer-uri: http://localhost:8080/realms/springex
         registration:
           oidc:
-            client-id: internal
-            client-secret: internal
+            client-id: springex-client
+            client-secret: 0QWVCAMp6B1SDcxVdMiZljb3ZSx5Kka4
             scope: openid, profile, email, offline_access # last one for refresh tokens
 
 server:

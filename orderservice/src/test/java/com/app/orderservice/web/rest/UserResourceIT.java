@@ -10,7 +10,6 @@ import com.app.orderservice.IntegrationTest;
 import com.app.orderservice.domain.Authority;
 import com.app.orderservice.domain.User;
 import com.app.orderservice.repository.UserRepository;
-import com.app.orderservice.repository.search.UserSearchRepository;
 import com.app.orderservice.security.AuthoritiesConstants;
 import com.app.orderservice.service.dto.AdminUserDTO;
 import com.app.orderservice.service.mapper.UserMapper;
@@ -52,9 +51,6 @@ class UserResourceIT {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserSearchRepository userSearchRepository;
 
     @Autowired
     private UserMapper userMapper;

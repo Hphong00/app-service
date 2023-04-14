@@ -1,0 +1,111 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413130855",
+  "clientRootFolder": "orderservice",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "cart",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdUser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedUser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shopId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "brandId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "productQuantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "productImage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subtotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "shippingCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "tax",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalMoney",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "productColor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productSize",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "couponCode",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "orderservice",
+  "name": "Cart",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
