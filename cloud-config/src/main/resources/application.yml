@@ -12,6 +12,10 @@ spring:
       server:
         git:
           uri: https://github.com/Hphong00/cloud-config-server.git
+          search-paths:
+            cloud-config/src/main/resources/config/
+          clone-on-start: true
+          default-label: main
       clone-on-start: true
 
 resilience4j:

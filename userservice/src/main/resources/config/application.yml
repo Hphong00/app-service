@@ -256,3 +256,71 @@ jhipster:
 # ===================================================================
 
 # application:
+
+keycloak:
+  realm: springex
+  auth-server-url: http://localhost:8080
+  ssl-required: none
+  resource: springex-client
+  verify-token-audience: false
+  credentials:
+    secret: 0QWVCAMp6B1SDcxVdMiZljb3ZSx5Kka4
+  use-resource-role-mappings: true
+  cors: true
+
+#  security-constraints:
+#    - auth-roles:
+#        - "*"
+#      security-collections:
+#        - name:
+#          patterns:
+#            - "/api/v1/auth/login"
+#          omitted-methods:
+#            - POST
+#        - name:
+#          patterns:
+#            - "/api/v1/*"
+#        - name:
+#          patterns:
+#            - "/api/v1/pub/*"
+#          omitted-methods:
+#            - GET
+#            - POST
+#            - PUT
+#  policy-enforcer-config:
+#    enforcement-mode: PERMISSIVE
+#    lazy-load-paths: true
+#    http-method-as-scope: true
+#    paths:
+#      - path: "/api/v1/auth/*"
+#        enforcement-mode: DISABLED
+#      - path: "/api/v1/user"
+#        methods:
+#          - method: POST
+#            scopes:
+#              - user.created
+#          - method: PUT
+#            scopes:
+#              - user.update
+#      - path: "/api/v1/user/search"
+#        methods:
+#          - method: POST
+#            scopes:
+#              - user.search
+#      - path: "/api/v1/user/{id}"
+#        methods:
+#          - method: GET
+#            scopes:
+#              - user.search
+#      - path: "/api/v1/role-group/*"
+#        methods:
+#          - method: GET
+#            scopes:
+#              - role-group.search
+#          - method: POST
+#            scopes:
+#              - role-group.manage
+
+keycloak-account:
+  admin-user: user
+  admin-password: user

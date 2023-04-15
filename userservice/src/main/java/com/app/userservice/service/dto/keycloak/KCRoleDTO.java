@@ -1,0 +1,18 @@
+package com.app.userservice.service.dto.keycloak;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
+import java.util.Map;
+
+@Getter
+@Setter
+@ToString
+public class KCRoleDTO {
+    private String id;
+    private String name;
+    private String description;
+    private Map<String, List<String>> attributes;
+}

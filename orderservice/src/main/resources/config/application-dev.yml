@@ -28,6 +28,8 @@ eureka:
       defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
 spring:
+  elasticsearch:
+    uris: https://5474a485e5ee4c8eae18417fa08bd58f.us-central1.gcp.cloud.es.io:9243
   devtools:
     restart:
       enabled: true
