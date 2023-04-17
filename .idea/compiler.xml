@@ -16,7 +16,7 @@
         <module name="discoveryservice" />
         <module name="ordersevice" />
       </profile>
-      <profile name="Annotation profile for Apigateway" enabled="true">
+      <profile name="Annotation profile for Notification" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -39,6 +39,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" />
         </processorPath>
         <module name="apigateway" />
+        <module name="notification" />
         <module name="orderservice" />
         <module name="userservice" />
         <module name="productservice" />
@@ -51,6 +52,7 @@
       <module name="cartsevice" target="11" />
       <module name="cloud-config" target="11" />
       <module name="discoveryservice" target="11" />
+      <module name="notification" target="11" />
       <module name="orderservice" target="11" />
       <module name="ordersevice" target="11" />
       <module name="paysevice" target="11" />

@@ -4,8 +4,10 @@ import com.app.userservice.domain.User;
 import com.app.userservice.repository.UserRepository;
 import com.app.userservice.service.KeycloakService;
 import com.app.userservice.service.UserService;
+import com.app.userservice.service.dto.UserInfoDTO;
 import com.app.userservice.service.dto.keycloak.KeycloakUser;
 import com.app.userservice.service.dto.SignUpRequest;
+import com.app.userservice.utils.ItsolException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -126,7 +126,7 @@ public class SecurityConfiguration {
             .pathMatchers("/api/authenticate").permitAll()
             .pathMatchers("/api/auth-info").permitAll()
             .pathMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .pathMatchers("/api/**").authenticated()
+            .pathMatchers("/api/**").permitAll()
             .pathMatchers("/services/*/v3/api-docs").hasAuthority(AuthoritiesConstants.ADMIN)
             .pathMatchers("/services/**").authenticated()
             .pathMatchers("/management/health").permitAll()
@@ -134,6 +134,7 @@ public class SecurityConfiguration {
             .pathMatchers("/management/info").permitAll()
             .pathMatchers("/management/prometheus").permitAll()
             .pathMatchers("/orderservice/**").permitAll()
+            .pathMatchers("/userservice/api/**").permitAll()
             .pathMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
 
         http.oauth2Login(oauth2 -> oauth2.authorizationRequestResolver(authorizationRequestResolver(this.clientRegistrationRepository)))

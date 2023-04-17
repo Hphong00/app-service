@@ -2,6 +2,7 @@ package com.app.userservice.web.rest;
 
 import com.app.userservice.config.keycloak.KeycloakProperties;
 import com.app.userservice.service.UserService;
+import com.app.userservice.service.dto.UserInfoDTO;
 import com.app.userservice.service.dto.auth.LoginReq;
 import com.app.userservice.service.dto.auth.LoginRes;
 import com.app.userservice.utils.ApiResponse;

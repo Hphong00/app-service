@@ -15,6 +15,8 @@
     <file url="file://$PROJECT_DIR$/cloud-config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discoveryservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discoveryservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/orderservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/orderservice/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ordersevice/src/main/java" charset="UTF-8" />

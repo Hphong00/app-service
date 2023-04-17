@@ -6,12 +6,18 @@ import com.app.orderservice.service.dto.OrderDTO;
 import com.app.orderservice.service.mapper.OrderMapper;
 import java.util.Optional;
 import java.util.UUID;
+
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.nimbusds.oauth2.sdk.AccessTokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Service Implementation for managing {@link Order}.
@@ -25,10 +31,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     private final OrderMapper orderMapper;
+    private final EurekaClient eurekaClient;
 
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper) {
+
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, @Qualifier("eurekaClient") EurekaClient eurekaClient) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.eurekaClient = eurekaClient;
     }
 
     /**
