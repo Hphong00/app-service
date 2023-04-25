@@ -1,5 +1,7 @@
 package com.app.productservice.service.dto;
 
+import com.app.productservice.core.dto.BaseSearchDto;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -10,7 +12,7 @@ import java.util.UUID;
  * A DTO for the {@link com.app.productservice.domain.Product} entity.
  */
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class ProductDTO implements Serializable {
+public class ProductSearchDTO extends BaseSearchDto implements Serializable {
 
     private UUID id;
 
@@ -39,6 +41,10 @@ public class ProductDTO implements Serializable {
     private String productAttributeId;
 
     private String brandId;
+
+    public ProductSearchDTO() {
+
+    }
 
     public UUID getId() {
         return id;
@@ -151,17 +157,20 @@ public class ProductDTO implements Serializable {
     public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
-
+    public ProductSearchDTO(String errorCode, String errorMessage) {
+        super.setErrorCode(errorCode);
+        super.setErrorMessage(errorMessage);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ProductDTO)) {
+        if (!(o instanceof ProductSearchDTO)) {
             return false;
         }
 
-        ProductDTO productDTO = (ProductDTO) o;
+        ProductSearchDTO productDTO = (ProductSearchDTO) o;
         if (this.id == null) {
             return false;
         }

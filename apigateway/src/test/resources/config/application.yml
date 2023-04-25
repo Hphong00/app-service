@@ -60,7 +60,7 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://DO_NOT_CALL:9080/realms/jhipster
+            issuer-uri: http://DO_NOT_CALL:8080/realms/springex
 
 server:
   port: 10344

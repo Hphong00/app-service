@@ -190,7 +190,7 @@ spring:
           oidc:
             client-id: springex-client
             client-secret: 0QWVCAMp6B1SDcxVdMiZljb3ZSx5Kka4
-            scope: openid, profile, email, offline_access # last one for refresh tokens
+#            scope: openid, profile, email, offline_access # last one for refresh tokens
 
 server:
   servlet:

@@ -48,11 +48,11 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
-    url: jdbc:postgresql://localhost:5432/apigateway
+    url: jdbc:postgresql://35.240.218.87:5432/apigateway
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/apigateway
+    url: r2dbc:postgresql://35.240.218.87:5432/apigateway
     username: phong
     password: 123456
   thymeleaf:

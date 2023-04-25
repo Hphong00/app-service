@@ -33,7 +33,7 @@
     "docker:jhipster-registry:await": "echo \"Waiting for jhipster-registry to start\" && wait-on -t 180000 http-get://localhost:8761/management/health && echo \"jhipster-registry started\"",
     "docker:jhipster-registry:down": "docker-compose -f src/main/docker/jhipster-registry.yml down -v",
     "docker:jhipster-registry:up": "docker-compose -f src/main/docker/jhipster-registry.yml up -d",
-    "docker:keycloak:await": "echo \"Waiting for keycloak to start\" && wait-on -t 180000 http-get://localhost:9080/realms/jhipster && echo \"keycloak started\" || echo \"keycloak not running, make sure oauth2 server is running\"",
+    "docker:keycloak:await": "echo \"Waiting for keycloak to start\" && wait-on -t 180000 http-get://localhost:8080/realms/springex && echo \"keycloak started\" || echo \"keycloak not running, make sure oauth2 server is running\"",
     "docker:keycloak:down": "docker-compose -f src/main/docker/keycloak.yml down -v",
     "docker:keycloak:up": "docker-compose -f src/main/docker/keycloak.yml up -d",
     "docker:others:await": "npm run docker:keycloak:await && npm run docker:jhipster-registry:await",
@@ -72,7 +72,7 @@
     "webapp:test": "npm run test --"
   },
   "config": {
-    "backend_port": "8080",
+    "backend_port": "9090",
     "default_environment": "prod",
     "packaging": "jar"
   },
