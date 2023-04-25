@@ -1,4 +1,4 @@
-package com.itsol.cryp.utils;
+package com.app.productservice.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

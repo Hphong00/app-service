@@ -12,7 +12,7 @@ import java.util.UUID;
  * A DTO for the {@link com.app.productservice.domain.Product} entity.
  */
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class ProductSearchDTO extends BaseSearchDto implements Serializable {
+public class ProductDTO implements Serializable {
 
     private UUID id;
 
@@ -42,7 +42,7 @@ public class ProductSearchDTO extends BaseSearchDto implements Serializable {
 
     private String brandId;
 
-    public ProductSearchDTO() {
+    public ProductDTO() {
 
     }
 
@@ -157,20 +157,17 @@ public class ProductSearchDTO extends BaseSearchDto implements Serializable {
     public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
-    public ProductSearchDTO(String errorCode, String errorMessage) {
-        super.setErrorCode(errorCode);
-        super.setErrorMessage(errorMessage);
-    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ProductSearchDTO)) {
+        if (!(o instanceof ProductDTO)) {
             return false;
         }
 
-        ProductSearchDTO productDTO = (ProductSearchDTO) o;
+        ProductDTO productDTO = (ProductDTO) o;
         if (this.id == null) {
             return false;
         }

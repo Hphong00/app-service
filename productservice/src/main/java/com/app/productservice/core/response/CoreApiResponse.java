@@ -1,4 +1,4 @@
-package com.app.productservice.core;
+package com.app.productservice.core.response;
 
 import com.app.productservice.core.constant.WebCoApiClientConstants;
 

@@ -1,15 +1,20 @@
-package com.app.notification.web.rest;
+package com.app.notificationservice.web.rest;
 
-import com.app.notification.service.EmailService;
-import com.app.notification.service.email.EmailDetails;
+
+import com.app.notificationservice.service.EmailService;
+import com.app.notificationservice.service.email.EmailDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.io.Serializable;
 
 @RestController
 @RequestMapping("/api")
-public class EmailResource {
+public class EmailResource  {
     @Autowired
     private EmailService emailService;
 
@@ -21,6 +26,15 @@ public class EmailResource {
         return status;
     }
 
+    @KafkaListener(topics = "order", groupId = "orderservice") public void listenGroupFoo(String message) {
+        EmailDetails details = new EmailDetails();
+        details.setRecipient(message);
+        details.setAttachment("1234");
+        details.setSubject("1234");
+        details.setMsgBody("1234");
+        String status = emailService.sendSimpleMail(details);
+        System.out.println("Received Message in group foo: " + status);
+    }
     // Sending email with attachment
     @PostMapping("/send-mail-with-attachment")
     public String sendMailWithAttachment(@RequestBody EmailDetails details) {

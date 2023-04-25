@@ -1,4 +1,4 @@
-package com.app.productservice.core;
+package com.app.productservice.core.constant;
 
 public final class WebCoApiClientConstants {
     public WebCoApiClientConstants() {
@@ -10,6 +10,8 @@ public final class WebCoApiClientConstants {
     public static final String RESPONSE_STATUS = "status";
 
     public static final String ERR_DATA_FORMAT_INVALID = "401";
+
+    public static final String AUTH_USER_PASS_INVALID = "401";
     public static final String ERR_DATA_NOT_DUPLICATE = "402";
     public static final String ERR_SYSTEM = "400";
     public static final String ERR_PHONE_EMAIL_IN_USE = "403";

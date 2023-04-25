@@ -1,28 +1,38 @@
 package com.app.productservice.web.rest;
 
+import com.app.productservice.core.Datatable;
+import com.app.productservice.core.dto.UserInfoKeycloakDTO;
+import com.app.productservice.core.response.WebCoResponse;
+import com.app.productservice.core.utils.WebCoUtils;
+import com.app.productservice.core.security.SecurityUtil;
 import com.app.productservice.repository.ProductRepository;
 import com.app.productservice.service.ProductService;
 import com.app.productservice.service.dto.ProductDTO;
+import com.app.productservice.service.dto.ProductSearchDTO;
 import com.app.productservice.web.rest.errors.BadRequestAlertException;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * REST controller for managing {@link com.app.productservice.domain.Product}.
@@ -37,7 +47,8 @@ public class ProductResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
+    @Autowired
+    private WebCoUtils webCoUtils;
     private final ProductService productService;
 
     private final ProductRepository productRepository;
@@ -55,7 +66,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/products")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) throws URISyntaxException {
+    public ResponseEntity<WebCoResponse<ProductDTO>> createProduct(@RequestBody ProductDTO productDTO) throws URISyntaxException {
         log.debug("REST request to save Product : {}", productDTO);
         if (productDTO.getId() != null) {
             throw new BadRequestAlertException("A new product cannot already have an ID", ENTITY_NAME, "idexists");
@@ -64,13 +75,13 @@ public class ProductResource {
         return ResponseEntity
             .created(new URI("/api/products/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            .body(webCoUtils.buildSuccessResponse(result));
     }
 
     /**
      * {@code PUT  /products/:id} : Updates an existing product.
      *
-     * @param id the id of the productDTO to save.
+     * @param id         the id of the productDTO to save.
      * @param productDTO the productDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productDTO,
      * or with status {@code 400 (Bad Request)} if the productDTO is not valid,
@@ -78,7 +89,8 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/products/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(
+    public ResponseEntity<WebCoResponse<ProductDTO>> updateProduct(
+        HttpServletRequest request,
         @PathVariable(value = "id", required = false) final UUID id,
         @RequestBody ProductDTO productDTO
     ) throws URISyntaxException {
@@ -89,22 +101,20 @@ public class ProductResource {
         if (!Objects.equals(id, productDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
         if (!productRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
-        ProductDTO result = productService.update(productDTO);
+        ProductDTO result = productService.update(request, id, productDTO);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, productDTO.getId().toString()))
-            .body(result);
+            .body(webCoUtils.buildSuccessResponse(result));
     }
 
     /**
      * {@code PATCH  /products/:id} : Partial updates given fields of an existing product, field will ignore if it is null
      *
-     * @param id the id of the productDTO to save.
+     * @param id         the id of the productDTO to save.
      * @param productDTO the productDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productDTO,
      * or with status {@code 400 (Bad Request)} if the productDTO is not valid,
@@ -112,7 +122,7 @@ public class ProductResource {
      * or with status {@code 500 (Internal Server Error)} if the productDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/products/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/products/{id}", consumes = {"application/json", "application/merge-patch+json"})
     public ResponseEntity<ProductDTO> partialUpdateProduct(
         @PathVariable(value = "id", required = false) final UUID id,
         @RequestBody ProductDTO productDTO
@@ -144,11 +154,11 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
      */
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDTO>> getAllProducts(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<WebCoResponse<List<ProductDTO>>> getAllProducts(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Products");
         Page<ProductDTO> page = productService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(webCoUtils.buildSuccessResponse(page.getContent()));
     }
 
     /**
@@ -178,5 +188,21 @@ public class ProductResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @PostMapping("/list-products/")
+    public ResponseEntity<WebCoResponse<Datatable>> getListProduct(@RequestBody ProductSearchDTO productSearchDTO) {
+        log.debug("Request to get list Product : {}", productSearchDTO);
+        Datatable result = productService.getListProduct(productSearchDTO);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, productSearchDTO.getId().toString()))
+            .body(webCoUtils.buildSuccessResponse(result));
+    }
+
+    @GetMapping("/user-info")
+    public ResponseEntity<WebCoResponse<UserInfoKeycloakDTO>> getUserInfo() {
+        SecurityUtil securityUtil = new SecurityUtil();
+        UserInfoKeycloakDTO userInfoDTO = securityUtil.getUserInfo();
+        return ResponseEntity.ok(webCoUtils.buildSuccessResponse(userInfoDTO));
     }
 }

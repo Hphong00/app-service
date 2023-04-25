@@ -9,8 +9,12 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import com.app.notificationservice.service.EmailService;
+import com.app.notificationservice.service.email.EmailDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.http.MediaType;
@@ -32,6 +36,9 @@ public class NotificationserviceKafkaResource {
 
     // TODO implement state of the art emitter repository to become 12 factor
     private Map<String, SseEmitter> emitters = new HashMap<>();
+
+    @Autowired
+    private EmailService emailService;
 
     public NotificationserviceKafkaResource(@Qualifier(KafkaSseProducer.CHANNELNAME) MessageChannel output) {
         this.output = output;
@@ -65,6 +72,13 @@ public class NotificationserviceKafkaResource {
     @StreamListener(value = KafkaSseConsumer.CHANNELNAME, copyHeaders = "false")
     public void consume(Message<String> message) {
         log.debug("Got message from kafka stream: {}", message.getPayload());
+        EmailDetails details = new EmailDetails();
+        details.setRecipient(message.getPayload());
+        details.setAttachment("1234");
+        details.setSubject("1234");
+        details.setMsgBody("1234");
+        String status = emailService.sendSimpleMail(details);
+        System.out.println("Received Message in group foo: " + status);
         emitters
             .entrySet()
             .stream()

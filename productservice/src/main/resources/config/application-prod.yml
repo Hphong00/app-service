@@ -52,14 +52,17 @@ spring:
       # it can be set to any label, branch or commit of the configuration source Git repository
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/productservice
+    url: jdbc:postgresql://35.240.218.87:5432/productservice
     username: phong
     password: 123456
     hikari:
       poolName: Hikari
       auto-commit: false
   jpa:
+    hibernate:
+      ddl-auto: update
     database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
+    show-sql: true
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod

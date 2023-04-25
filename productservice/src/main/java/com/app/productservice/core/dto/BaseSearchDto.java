@@ -1,4 +1,6 @@
-package com.app.productservice.core;
+package com.app.productservice.core.dto;
+
+import com.app.productservice.core.BaseObj;
 
 import java.util.Map;
 

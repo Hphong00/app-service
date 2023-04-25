@@ -4,20 +4,25 @@ import com.app.orderservice.domain.Order;
 import com.app.orderservice.repository.OrderRepository;
 import com.app.orderservice.service.dto.OrderDTO;
 import com.app.orderservice.service.mapper.OrderMapper;
-import java.util.Optional;
-import java.util.UUID;
-
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.nimbusds.oauth2.sdk.AccessTokenResponse;
+import com.app.orderservice.web.rest.errors.BadRequestAlertException;
+import com.app.proxyclient.product.service.ProductClientService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service Implementation for managing {@link Order}.
@@ -29,16 +34,19 @@ public class OrderService {
     private final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
-
+    @Autowired
+    private RestTemplate restTemplate;
     private final OrderMapper orderMapper;
-    private final EurekaClient eurekaClient;
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private static final String ENTITY_NAME = "orderserviceOrder";
 
-
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, @Qualifier("eurekaClient") EurekaClient eurekaClient) {
+    public OrderService(OrderRepository orderRepository, RestTemplate restTemplate, OrderMapper orderMapper, KafkaTemplate<String, String> kafkaTemplate) {
         this.orderRepository = orderRepository;
+        this.restTemplate = restTemplate;
         this.orderMapper = orderMapper;
-        this.eurekaClient = eurekaClient;
+        this.kafkaTemplate = kafkaTemplate;
     }
+
 
     /**
      * Save a order.
@@ -46,12 +54,45 @@ public class OrderService {
      * @param orderDTO the entity to save.
      * @return the persisted entity.
      */
-    public OrderDTO save(OrderDTO orderDTO) {
+    public OrderDTO save(HttpServletRequest request, OrderDTO orderDTO) throws JsonProcessingException {
         log.debug("Request to save Order : {}", orderDTO);
+        ProductClientService productClientService = new ProductClientService();
+        if (productClientService.findProductById(request, orderDTO.getProductId()) == null) {
+            throw new BadRequestAlertException("Invalid order", ENTITY_NAME, "ordernull");
+        }
+        if (productClientService.updateProductById(request, orderDTO.getProductId(), orderDTO.getProductQuantity(), 2) == null) {
+            throw new BadRequestAlertException("Invalid updateProductById", ENTITY_NAME, "ordernull");
+        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String orderJson = objectMapper.writeValueAsString(orderDTO);
+//        Message<String> message = MessageBuilder.withPayload(orderJson).build();
+        kafkaTemplate.send("order", orderDTO.getUserId());
         Order order = orderMapper.toEntity(orderDTO);
         order = orderRepository.save(order);
         return orderMapper.toDto(order);
     }
+
+    private String getClientIpAddress(HttpServletRequest request) {
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        return ipAddress;
+    }
+
+//    public void sendMessage(Object message) {
+//        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("order", message);
+//        future.whenComplete((result, ex) -> {
+//            if (ex == null) {
+//                System.out.println("Sent message=[" + message +
+//                    "] with offset=[" + result.getRecordMetadata().offset() + "]");
+//            } else {
+//                System.out.println("Unable to send message=[" +
+//                    message + "] due to : " + ex.getMessage());
+//            }
+//        });
+//    }
+
 
     /**
      * Update a order.

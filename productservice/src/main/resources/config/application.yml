@@ -124,6 +124,11 @@ management:
 spring:
   application:
     name: productservice
+#  firebase:
+#    bucket-name: appweb-70c6e
+#    image-url: https://storage.googleapis.com/${firebase.bucket-name}/%s
+
+
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -194,7 +199,7 @@ spring:
           oidc:
             client-id: springex-client
             client-secret: 0QWVCAMp6B1SDcxVdMiZljb3ZSx5Kka4
-            scope: openid, profile, email, offline_access # last one for refresh tokens
+            scope: all # last one for refresh tokens
 
 server:
   servlet:

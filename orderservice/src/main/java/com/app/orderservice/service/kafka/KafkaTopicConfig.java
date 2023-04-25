@@ -1,4 +1,4 @@
-package com.app.notificationservice.service.kafka;
+package com.app.orderservice.service.kafka;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaAdmin;
-
+import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
-
+import org.springframework.kafka.support.serializer.JsonSerializer;
 @Configuration
 public class KafkaTopicConfig {
 
-    @Value(value = "${spring.kafka.bootstrap-servers}")
-    private String bootstrapAddress;
+    private final String bootstrapAddress = "http://localhost:9092";
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -25,6 +24,6 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("baeldung", 1, (short) 1);
+        return new NewTopic("order", 1, (short) 1);
     }
 }

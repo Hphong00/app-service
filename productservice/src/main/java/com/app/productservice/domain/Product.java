@@ -1,5 +1,7 @@
 package com.app.productservice.domain;
 
+import com.app.productservice.core.security.SecurityUtil;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -59,8 +61,6 @@ public class Product implements Serializable {
 
     @Column(name = "brand_id")
     private String brandId;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public UUID getId() {
         return this.id;
@@ -282,5 +282,17 @@ public class Product implements Serializable {
             ", productAttributeId='" + getProductAttributeId() + "'" +
             ", brandId='" + getBrandId() + "'" +
             "}";
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.setCreatedDate(Instant.now());
+        this.setCreatedUser(SecurityUtil.getCurrentUser());
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.setUpdatedDate(Instant.now());
+        this.setUpdatedUser(SecurityUtil.getCurrentUser());
     }
 }

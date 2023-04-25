@@ -1,4 +1,4 @@
-package com.itsol.cryp.utils;
+package com.app.productservice.core.utils;
 
 import org.springframework.util.StringUtils;
 

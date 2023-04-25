@@ -7,7 +7,6 @@
         <option value="$PROJECT_DIR$/cartsevice/pom.xml" />
         <option value="$PROJECT_DIR$/ordersevice/pom.xml" />
         <option value="$PROJECT_DIR$/userservice/pom.xml" />
-        <option value="$PROJECT_DIR$/base-service/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-config/pom.xml" />
         <option value="$PROJECT_DIR$/productservice/pom.xml" />
         <option value="$PROJECT_DIR$/transportsevice/pom.xml" />
@@ -17,6 +16,10 @@
         <option value="$PROJECT_DIR$/orderservice/pom.xml" />
         <option value="$PROJECT_DIR$/apigetway/pom.xml" />
         <option value="$PROJECT_DIR$/notification/pom.xml" />
+        <option value="$PROJECT_DIR$/notificationservice/pom.xml" />
+        <option value="$PROJECT_DIR$/base-service/pom.xml" />
+        <option value="$PROJECT_DIR$/proxy-client/pom.xml" />
+        <option value="$PROJECT_DIR$/jhipster-registry/pom.xml" />
       </list>
     </option>
   </component>

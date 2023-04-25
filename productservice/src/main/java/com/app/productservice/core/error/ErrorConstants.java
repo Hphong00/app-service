@@ -1,4 +1,4 @@
-package com.sib.co.web.rest.error;
+package com.app.productservice.core.error;
 
 public final class ErrorConstants {
 

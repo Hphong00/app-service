@@ -13,7 +13,6 @@
 //import org.springframework.web.multipart.MultipartFile;
 //
 //import java.io.IOException;
-//import java.io.InputStream;
 //import java.util.HashMap;
 //import java.util.Map;
 //import java.util.UUID;
@@ -26,12 +25,10 @@
 //    @EventListener
 //    public void init(ApplicationReadyEvent event) {
 //        try {
-//            InputStream serviceAccount = getClass().getResourceAsStream("/firebase.json");
-//            storage = StorageOptions.newBuilder()
-//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//                .setProjectId("appweb-70c6e")
-//                .build()
-//                .getService();
+//            ClassPathResource serviceAccount = new ClassPathResource("firebase.json");
+//            storage = StorageOptions.newBuilder().
+//                setCredentials(GoogleCredentials.fromStream(serviceAccount.getInputStream())).
+//                setProjectId("appweb-70c6e").build().getService();
 //        } catch (Exception ex) {
 //            ex.printStackTrace();
 //        }
@@ -41,7 +38,7 @@
 //        String imageName = generateFileName(file.getOriginalFilename());
 //        Map<String, String> map = new HashMap<>();
 //        map.put("firebaseStorageDownloadTokens", imageName);
-//        BlobId blobId = BlobId.of("gs://appweb-70c6e/product", imageName);
+//        BlobId blobId = BlobId.of("gs://appweb-70c6e.appspot.com", imageName);
 //        BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
 //            .setMetadata(map)
 //            .setContentType(file.getContentType())

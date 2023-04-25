@@ -1,15 +1,24 @@
 package com.app.productservice.web.rest;
 
 import com.app.productservice.service.UserService;
+import com.app.productservice.service.dto.AdminUserDTO;
 import com.app.productservice.service.dto.UserDTO;
+
+import java.security.Principal;
 import java.util.*;
+
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
@@ -48,5 +57,22 @@ public class PublicUserResource {
     @GetMapping("/authorities")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
+    }
+
+    @GetMapping("/admin-user")
+    public ResponseEntity<AdminUserDTO> getAdminUser(@AuthenticationPrincipal AbstractAuthenticationToken authToken) {
+        AdminUserDTO adminUserDTO = userService.getUserFromAuthentication(authToken);
+        return ResponseEntity.ok().body(adminUserDTO);
+    }
+
+    @GetMapping("/userinfo")
+    public ResponseEntity<String> getUserInfo(Principal principal) {
+        if (principal instanceof KeycloakPrincipal) {
+            KeycloakPrincipal<KeycloakSecurityContext> keycloakPrincipal = (KeycloakPrincipal<KeycloakSecurityContext>) principal;
+            String username = keycloakPrincipal.getKeycloakSecurityContext().getToken().getPreferredUsername();
+            return new ResponseEntity<String>(username, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("User not authenticated with Keycloak", HttpStatus.UNAUTHORIZED);
+        }
     }
 }

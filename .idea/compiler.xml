@@ -11,12 +11,12 @@
         <module name="transportsevice" />
         <module name="administrationsevice" />
         <module name="cartsevice" />
-        <module name="base-service" />
         <module name="paysevice" />
         <module name="discoveryservice" />
         <module name="ordersevice" />
+        <module name="proxy-client" />
       </profile>
-      <profile name="Annotation profile for Notification" enabled="true">
+      <profile name="Annotation profile for Productservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -40,9 +40,21 @@
         </processorPath>
         <module name="apigateway" />
         <module name="notification" />
-        <module name="orderservice" />
+        <module name="notificationservice" />
         <module name="userservice" />
+        <module name="orderservice" />
         <module name="productservice" />
+      </profile>
+      <profile name="Annotation profile for JHipster Registry" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.7.3/spring-boot-configuration-processor-2.7.3.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.2.Final/mapstruct-processor-1.5.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
+        </processorPath>
+        <module name="jhipster-registry" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -52,11 +64,14 @@
       <module name="cartsevice" target="11" />
       <module name="cloud-config" target="11" />
       <module name="discoveryservice" target="11" />
+      <module name="jhipster-registry" target="11" />
       <module name="notification" target="11" />
+      <module name="notificationservice" target="11" />
       <module name="orderservice" target="11" />
       <module name="ordersevice" target="11" />
       <module name="paysevice" target="11" />
       <module name="productservice" target="11" />
+      <module name="proxy-client" target="11" />
       <module name="transportsevice" target="11" />
       <module name="userservice" target="11" />
       <module name="zipkin-server" target="11" />
@@ -73,6 +88,7 @@
       <module name="ordersevice" options="-parameters" />
       <module name="paysevice" options="-parameters" />
       <module name="productservice" options="" />
+      <module name="proxy-client" options="-parameters" />
       <module name="transportsevice" options="-parameters" />
       <module name="zipkin-server" options="" />
     </option>

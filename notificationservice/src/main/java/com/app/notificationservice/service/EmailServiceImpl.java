@@ -1,7 +1,6 @@
-package com.app.notification.service.serviceimpl;
+package com.app.notificationservice.service;
 
-import com.app.notification.service.EmailService;
-import com.app.notification.service.email.EmailDetails;
+import com.app.notificationservice.service.email.EmailDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;

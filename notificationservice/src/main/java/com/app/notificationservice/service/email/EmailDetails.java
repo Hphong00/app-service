@@ -1,8 +1,6 @@
-package com.app.notification.service.email;
+package com.app.notificationservice.service.email;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class EmailDetails {

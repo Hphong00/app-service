@@ -1,9 +1,7 @@
-package com.app.notification.service;
+package com.app.notificationservice.service;
 
 
-import com.app.notification.service.email.EmailDetails;
-
-import java.util.List;
+import com.app.notificationservice.service.email.EmailDetails;
 
 public interface EmailService {
     String sendSimpleMail(EmailDetails details);

@@ -4,15 +4,17 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/administrationsevice/administrationsevice.iml" filepath="$PROJECT_DIR$/administrationsevice/administrationsevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/apigateway/apigateway.iml" filepath="$PROJECT_DIR$/apigateway/apigateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/base-service/base-service.iml" filepath="$PROJECT_DIR$/base-service/base-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/cartsevice/cartsevice.iml" filepath="$PROJECT_DIR$/cartsevice/cartsevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-config/cloud-config.iml" filepath="$PROJECT_DIR$/cloud-config/cloud-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/discoveryservice/discoveryservice.iml" filepath="$PROJECT_DIR$/discoveryservice/discoveryservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jhipster-registry/jhipster-registry.iml" filepath="$PROJECT_DIR$/jhipster-registry/jhipster-registry.iml" />
       <module fileurl="file://$PROJECT_DIR$/notification/notification.iml" filepath="$PROJECT_DIR$/notification/notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificationservice/notificationservice.iml" filepath="$PROJECT_DIR$/notificationservice/notificationservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/orderservice/orderservice.iml" filepath="$PROJECT_DIR$/orderservice/orderservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/ordersevice/ordersevice.iml" filepath="$PROJECT_DIR$/ordersevice/ordersevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/paysevice/paysevice.iml" filepath="$PROJECT_DIR$/paysevice/paysevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/productservice/productservice.iml" filepath="$PROJECT_DIR$/productservice/productservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy-client/proxy-client.iml" filepath="$PROJECT_DIR$/proxy-client/proxy-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/transportsevice/transportsevice.iml" filepath="$PROJECT_DIR$/transportsevice/transportsevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/userservice/userservice.iml" filepath="$PROJECT_DIR$/userservice/userservice.iml" />
     </modules>

@@ -1,4 +1,4 @@
-package com.sib.co.web.rest.error;
+package com.app.productservice.core.error;
 
 import java.io.Serializable;
 import java.util.Map;

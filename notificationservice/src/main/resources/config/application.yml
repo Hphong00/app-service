@@ -123,6 +123,17 @@ management:
             enabled: true
 
 spring:
+  mail:
+    host: smtp.gmail.com
+    username: hoangxuanphong00@gmail.com
+    password: ujekamuqxzpuvemg
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   autoconfigure:
     exclude: org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
   application:
@@ -136,13 +147,13 @@ spring:
           brokers: localhost:9092
       bindings:
         binding-in-sse:
-          destination: sse-topic
+          destination: order
           content-type: text/plain
-          group: notificationservice
+          group: orderservice
         binding-out-sse:
-          destination: sse-topic
+          destination: notification
           content-type: text/plain
-          group: notificationservice
+          group: notification
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file

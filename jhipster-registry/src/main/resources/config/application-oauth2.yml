@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://localhost:8080/realms/springex
+        registration:
+          oidc:
+            client-id: springex-client
+            client-secret: 0QWVCAMp6B1SDcxVdMiZljb3ZSx5Kka4
+            scope: all
+
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        # custom session cookie name to prevent conflict with another application on the same domain
+        name: JSESSIONID_REGISTRY

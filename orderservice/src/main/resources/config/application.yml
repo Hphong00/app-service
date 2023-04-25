@@ -46,8 +46,8 @@ eureka:
       version: #project.version#
       git-version: ${git.commit.id.describe:}
       git-commit: ${git.commit.id.abbrev:}
-      git-branch: ${git.branch:}
-      context-path: ${server.servlet.context-path:}
+      git-branch: main
+      context-path: https://github.com/Hphong00/cloud-config-server.git
 feign:
   circuitbreaker:
     enabled: true
@@ -122,6 +122,22 @@ management:
             enabled: true
 
 spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          replicationFactor: 1
+          auto-create-topics: true
+          brokers: http://localhost:9092
+      bindings:
+        binding-in-sse:
+          destination: notification
+          content-type: application/json
+          group: notificationservice
+        binding-out-sse:
+          destination: order
+          content-type: application/json
+          group: orderservice
   application:
     name: orderservice
   profiles:

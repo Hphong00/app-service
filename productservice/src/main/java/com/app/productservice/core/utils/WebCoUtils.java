@@ -1,5 +1,6 @@
-package com.app.productservice.core;
+package com.app.productservice.core.utils;
 
+import com.app.productservice.core.response.WebCoResponse;
 import com.app.productservice.core.constant.WebCoApiClientConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.app.proxyclient.product.model;
+package com.app.proxyclient.product.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
